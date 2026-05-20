@@ -12,20 +12,45 @@ Instead of relying on one keyword search, this skill guides the agent to expand 
 - Uses token controls so the agent reads broadly first and deeply only for top candidates.
 - Produces a scenario-based shortlist with evidence and a validation plan.
 
+## GitHub Access
+
+This repository is a skill, not a running MCP server.
+
+The skill can use any GitHub access method available in the host app:
+
+- Codex GitHub connector or plugin
+- GitHub MCP server
+- GitHub CLI (`gh`)
+- Web search or public GitHub pages as a fallback
+
+You do not need to configure GitHub MCP just to use this skill in Codex if Codex already has a working GitHub connector/plugin. MCP is only one optional tool channel for repository search, README inspection, issue/PR checks, and metadata collection.
+
 ## Install
 
-Copy the `github-idea-scout/` folder into your Codex skills directory.
+Copy the inner `github-idea-scout/` skill folder from this repository into your Codex skills directory. Do not copy the whole repository folder as an extra nesting level.
 
-Windows:
+Correct Windows destination:
 
 ```powershell
-C:\Users\<you>\.codex\skills\github-idea-scout
+C:\Users\<you>\.codex\skills\github-idea-scout\SKILL.md
 ```
 
-macOS/Linux:
+Correct macOS/Linux destination:
 
 ```bash
-~/.codex/skills/github-idea-scout
+~/.codex/skills/github-idea-scout/SKILL.md
+```
+
+If you clone the repository first, copy this folder:
+
+```text
+github-idea-scout/github-idea-scout/
+```
+
+into:
+
+```text
+~/.codex/skills/github-idea-scout/
 ```
 
 Restart Codex if the skill list does not refresh automatically.
