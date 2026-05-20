@@ -1,92 +1,52 @@
 ---
 name: github-idea-scout
-description: Use when the user wants to find, evaluate, compare, or rank existing GitHub repositories for a natural-language product idea, feature idea, library need, prototype, technical solution, or "has someone already built this?" question. Produces a ranked shortlist with evidence, fit scoring, maintenance signals, license and risk notes, rejected candidates, and validation steps.
+description: ai open-source project discovery and github repository research workflow. use when the user describes an idea, product need, library need, prototype, or vague technical requirement and wants to find, compare, rank, or recommend github repositories. triggers include natural-language github search, has anyone built this, find repos, compare open-source projects, read readmes, evaluate stars/issues/commits/releases, github mcp, codex github research, or which repo best fits my idea.
 ---
 
 # GitHub Idea Scout
 
-## Overview
+## Purpose
 
-Use this skill to turn a user's rough idea into a ranked, evidence-backed list of existing GitHub projects. The goal is not just to find links; it is to help the user decide which repositories are worth trying first.
+Use this skill to turn a vague idea into an evidence-backed shortlist of existing open-source GitHub projects. The goal is not to return links. The goal is to help the user decide which repositories are worth trying, forking, integrating, or ignoring.
 
-This skill is intentionally search-and-evaluation only. Do not claim a repository works locally unless you actually clone, install, build, or run it.
+Do not claim a project works locally unless it has actually been cloned, installed, built, tested, or run in the current task.
 
-## Default Workflow
+## Preferred Tools
 
-1. Restate the user's idea as concrete requirements.
-2. Extract:
-   - must-have capabilities
-   - nice-to-have capabilities
-   - preferred and excluded tech stacks
-   - artifact type: library, template, full app, CLI, API, service, plugin, demo, or reference implementation
-   - license or commercial-use constraints
-   - validation target: learn from code, reuse directly, fork, self-host, or integrate as a dependency
-3. Ask at most two clarifying questions only when missing constraints would materially change the search. Otherwise make reasonable assumptions and state them.
-4. Read `references/search-playbook.md` when building search queries.
-5. Search broadly with multiple query families, not one literal phrase.
-6. Gather evidence for each candidate:
-   - repository URL and owner/name
-   - README or docs claims relevant to the idea
-   - language and framework
-   - stars, forks, last push, release recency, archived status, and license when visible
-   - issue and PR activity when visible
-   - demo, examples, quickstart, package, or Docker availability when visible
-7. Read `references/scoring-rubric.md` before ranking candidates.
-8. Exclude poor candidates explicitly instead of hiding them.
-9. Return a ranked shortlist and a 30-minute validation plan.
+Use connected GitHub tools, GitHub MCP tools, Codex execution, repository connectors, or web search when available. Prefer GitHub data for repository facts. Use the closest available tool for repository search, README inspection, issue search, PR search, commit search, release inspection, and repository metadata.
 
-## Search Guidance
+## Workflow
 
-Search for repositories, packages, examples, and comparison pages. Include both exact product terms and implementation terms.
+### 1. Clarify only when necessary
+Ask at most two questions only if missing information would materially change the search. Otherwise proceed and state assumptions.
 
-Prefer current, primary evidence:
-- GitHub repository pages
-- README and documentation
-- release pages
-- issue and PR activity
-- package registry pages when relevant
-- official project websites linked from the repository
+Infer or state: desired artifact type, reuse goal, must-have features, nice-to-have features, preferred or excluded tech stack, deployment constraints, license constraints, and maturity expectation.
 
-Avoid over-trusting:
-- stale blog roundups
-- star count alone
-- README claims without examples or recent activity
-- projects that are demos when the user needs production-ready code
+### 2. Build a research brief
+Before searching, structure the idea into: core problem statement, primary use case, must-have capabilities, adjacent capabilities, likely category names, implementation terms, GitHub topics, hard constraints, and disqualifiers. Do not trust the user's exact words; vocabulary mismatch is the main failure mode.
 
-## Ranking Rules
+### 3. Expand queries
+Read `references/search-playbook.md`. Generate several query families: exact wording, synonyms, implementation terms, artifact terms, ecosystem terms, and discovery terms.
 
-Use a 0-100 score only when enough evidence exists. If evidence is thin, mark confidence as low instead of inventing precision.
+### 4. Retrieve broadly, then deduplicate
+Initial target: 20-30 plausible candidates. Deduplicate forks, mirrors, renamed projects, and thin wrappers around the same upstream.
 
-Always distinguish:
-- `Fit`: Does it solve the user's actual problem?
-- `Health`: Is it maintained and usable today?
-- `Cost`: How hard is it to adopt or verify?
-- `Risk`: What could block real use?
+### 5. Filter early
+Reject or downgrade archived, license-missing, README-poor, toy-only, stale, mismatched, fork-only, or keyword-only repositories. Do not discard a low-star repo solely because it is low-star if it is relevant and active.
 
-Do not rank a repository highly only because it has many stars. A smaller active project may be better than a famous abandoned one.
+### 6. Control token use
+Read `references/token-budget.md`. Default limits: metadata scan up to 30 repos; README skim top 8-10; README deep read top 3-5; issues newest 10-20 for top 3-5; PRs newest 5-10 for top 3 when needed; releases newest 3-5 for top 3-5. Avoid code files unless the user asks for code-level verification or README evidence conflicts.
 
-## Output Format
+### 7. Evaluate quality beyond stars
+Read `references/scoring-rubric.md`. Judge candidates on fit, docs, time-to-first-value, setup complexity, release discipline, issue response, PR activity, contributors, license, integrations, examples, demos, production signals, and community signals. Stars are only one adoption signal.
 
-Use this structure:
+### 8. Recommend by scenario
+Prefer scenario buckets over a fake universal ranking: best overall fit, fast validation, self-hosting, library/API, full application, mature option, lightweight option, promising but risky, lower fit/rejected.
 
-1. `Assumptions`: Briefly state constraints you inferred.
-2. `Best Pick`: One repository, with a short reason.
-3. `Ranked Shortlist`: Table with rank, repo, fit score, maintenance signal, license, validation effort, and why it matches.
-4. `Details`: 2-4 bullets per strong candidate covering evidence, gaps, and integration notes.
-5. `Rejected Or Lower-Fit Candidates`: Repos that looked relevant but were excluded, with reasons.
-6. `30-Minute Validation Plan`: Concrete next steps to check whether the top 1-3 repos actually work.
-7. `Confidence`: State whether the result is based on search metadata only or includes deeper repo inspection.
+### 9. Output report
+Use `references/report-template.md`. Always include assumptions, search strategy, best pick, shortlist, evidence table, candidate details, rejected candidates, risks, validation plan, and confidence level.
 
-If the user asks for actual verification, move from search to execution: clone the top repositories only after confirming scope and then install, build, run tests, or launch demos as appropriate.
+Confidence levels: metadata-level, README-level, issue-level, execution-level.
 
-## When To Stop
-
-Stop after producing a decision-ready shortlist unless the user asks to clone or run projects. For most discovery tasks, 5-10 ranked candidates are enough.
-
-## Limitations To State
-
-When relevant, be explicit that:
-- Search can miss niche or poorly indexed repositories.
-- Public metadata cannot prove a project runs.
-- License and security review are initial signals, not legal or security approval.
-- Private repositories, package ecosystems, or paid tools may require additional access.
+## Stop Condition
+Stop when the user has a decision-ready shortlist. Usually 3-7 strong candidates are enough. More links are not better unless the user asks for an exhaustive landscape scan.

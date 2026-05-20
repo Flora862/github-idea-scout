@@ -1,7 +1,7 @@
 interface:
   display_name: "GitHub Idea Scout"
-  short_description: "Find and rank GitHub repositories for a natural-language idea."
-  default_prompt: "Use $github-idea-scout to find existing GitHub projects for my idea and rank them by fit, maintenance, risk, and validation effort."
+  short_description: "Find, evaluate, and rank GitHub repositories for a natural-language idea."
+  default_prompt: "Use $github-idea-scout to find existing GitHub projects for my idea. Read README evidence, check maintenance and issue signals, then rank by fit, risk, and validation effort."
 
 policy:
   allow_implicit_invocation: true

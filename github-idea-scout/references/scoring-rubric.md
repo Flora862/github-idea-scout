@@ -1,8 +1,6 @@
 # Scoring Rubric
 
-Use this rubric to rank candidate repositories. Score out of 100 when enough evidence exists. If evidence is limited, provide a qualitative score such as `high`, `medium`, or `low` confidence.
-
-## Weights
+Use this rubric to rank candidate repositories. Score out of 100 only when enough evidence exists. If evidence is limited, use qualitative confidence.
 
 | Dimension | Weight | What To Check |
 | --- | ---: | --- |
@@ -13,39 +11,14 @@ Use this rubric to rank candidate repositories. Score out of 100 when enough evi
 | Adoption signal | 10 | Stars, forks, contributors, package downloads, dependent projects, community mentions |
 | License and risk | 10 | License clarity, commercial compatibility, security posture, known blockers |
 
-## Scoring Notes
+## Signals Beyond Stars
 
-- Do not use stars as a proxy for fit.
-- Prefer active, narrowly relevant repositories over popular but generic repositories.
-- Penalize unclear setup instructions when the user wants fast validation.
-- Penalize missing or incompatible license when the user wants commercial use.
-- Penalize abandoned projects even if they are highly starred.
-- Reward projects with examples, Docker Compose, hosted demos, sample data, or tests.
-
-## Confidence Labels
-
-Use these labels in addition to scores:
-
-- `High`: Multiple strong evidence sources, recent activity, clear docs, and direct feature match.
-- `Medium`: Good match but some uncertainty around maintenance, setup, or missing features.
-- `Low`: Looks relevant by keywords, but evidence is thin or stale.
+Check README quality, quickstart quality, Docker or one-command setup, examples, docs site, release notes, semantic versioning, issue response speed, closed/open issue ratio, PR merge activity, contributor diversity, bus factor, license clarity, production claims, integration ecosystem, package downloads, dependent repositories, discussions, and visible user feedback.
 
 ## Risk Flags
 
-Flag these explicitly:
-
-- `Archived`
-- `Stale`
-- `License unclear`
-- `Commercial-use risk`
-- `No quickstart`
-- `No release history`
-- `Demo only`
-- `High setup cost`
-- `Framework mismatch`
-- `Security review needed`
-- `Unclear maintainer activity`
+Flag archived, stale, license unclear, commercial-use risk, no quickstart, no release history, demo only, high setup cost, framework mismatch, security review needed, unclear maintainer activity, single-maintainer risk, and open-core feature risk.
 
 ## Recommendation Rule
 
-The top recommendation should be the repository with the best combined practical value, not necessarily the highest numerical score. Practical value means the user can plausibly validate or reuse it quickly for their stated goal.
+The top recommendation should have the best combined practical value, not necessarily the highest star count or numerical score. Practical value means the user can plausibly validate or reuse it quickly for the stated goal.
