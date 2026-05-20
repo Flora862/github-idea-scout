@@ -1,6 +1,6 @@
 ---
 name: github-idea-scout
-description: ai open-source project discovery and github repository research workflow. use when the user describes an idea, product need, library need, prototype, or vague technical requirement and wants to find, compare, rank, or recommend github repositories. triggers include natural-language github search, has anyone built this, find repos, compare open-source projects, read readmes, evaluate stars/issues/commits/releases, github mcp, codex github research, or which repo best fits my idea.
+description: ai open-source project discovery and github repository research workflow. use when the user describes an idea, product need, library need, prototype, or vague technical requirement and wants to find, compare, rank, or recommend github repositories. triggers include natural-language github search, has anyone built this, find repos, compare open-source projects, read readmes, evaluate stars/issues/commits/releases, codex github research, or which repo best fits my idea.
 ---
 
 # GitHub Idea Scout
@@ -13,7 +13,9 @@ Do not claim a project works locally unless it has actually been cloned, install
 
 ## Preferred Tools
 
-Use connected GitHub tools, GitHub MCP tools, Codex execution, repository connectors, or web search when available. Prefer GitHub data for repository facts. Use the closest available tool for repository search, README inspection, issue search, PR search, commit search, release inspection, and repository metadata.
+Use whichever GitHub access channel is available in the current host: Codex GitHub connectors or plugins, GitHub MCP servers, GitHub CLI, repository connectors, Codex execution, or web search/public GitHub pages as a fallback. MCP is optional; do not require the user to configure GitHub MCP when another GitHub tool is already available.
+
+Prefer GitHub data for repository facts. Use the closest available tool for repository search, README inspection, issue search, PR search, commit search, release inspection, and repository metadata.
 
 ## Workflow
 
@@ -49,4 +51,5 @@ Use `references/report-template.md`. Always include assumptions, search strategy
 Confidence levels: metadata-level, README-level, issue-level, execution-level.
 
 ## Stop Condition
+
 Stop when the user has a decision-ready shortlist. Usually 3-7 strong candidates are enough. More links are not better unless the user asks for an exhaustive landscape scan.
