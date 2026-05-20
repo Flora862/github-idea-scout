@@ -1,5 +1,0 @@
-interface:
-  display_name: OSS Research Agent
-  short_description: Find, compare, and evaluate GitHub repositories from natural-language ideas.
-  icon: magnifying-glass
-  color: blue
